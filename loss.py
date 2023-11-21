@@ -9,7 +9,7 @@ class VAE_Loss(torch.nn.Module):
   
   def KL_loss (self, mu, log_var, z):
 
-    kl = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
+    kl = -0.5 * (1 + log_var - mu.pow(2) - log_var.exp())
     kl = kl.sum(-1)  # to go from multi-dimensional z to single dimensional z : (batch_size x latent_size) ---> (batch_size) 
                                                                       # i.e Z = [ [z1_1, z1_2 , ...., z1_lt] ] ------> z = [ z1] 
                                                                       #         [ [z2_1, z2_2, ....., z2_lt] ]             [ z2]
